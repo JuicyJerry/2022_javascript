@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>끝말잇기</title>
+</head>
+<body>
+        <label for='input'>단어를 입력하세요 :  </label>
+        <input type='text' id='input' name='input' />
+        <input type='button' id='submit' name='submit'/>
+        <div>제시어: <span id='word'></span></div>
+        <div><span id='order'>1</span>번째 참가자</div>
+
+    <script>
+        let userNums = window.prompt('몇 명이 참가하시나요?');
+        let $button = document.querySelector('#submit');
+        let $input = document.querySelector('#input');
+        let $word = document.querySelector('#word');
+        let $order = document.querySelector('#order');
+
+        let word;
+        let newWord;
+       
+        // if (userNums === null) document.write('취소하였습니다');
+        // else if (userNums <= 0 || typeof Number(userNums) !== 'number') alert('참가 인원 수를 다시 입력해주세요');
+        // else alert('끝나는 말로 시작하는 세 글자 단어 해주세요. 쿵쿵따!');
+        // let startWord = prompt('제시어를 입력하세요');
+        // word = startWord;
+
+        // document.write('이번 제시어는 -> \'' + startWord + '\'');
+
+        const onClickButton = () => {
+            
+            if (!word || word[word.length - 1] === newWord[0]) {
+                word = newWord;
+                $word.textContent = word;
+                console.log(word);
+                
+               let order = Number($order.textContent);
+               if (order + 1 === userNums) {
+                   console.log(order);
+                   $order.textContent = 1;
+               } else {
+                   console.log(order);
+                   $order.textContent = order + 1;
+               }
+            } else {
+             alert('올바르지 않은 단어입니다');
+            }
+            $input.value = '';
+            $input.focus();
+        }
+
+        const onInput = (event) => {
+            newWord = event.target.value;
+            console.log(newWord);
+        }
+
+        // const onInsert = (event) => {
+        //     $word.textContent = startWord
+        // }
+
+        // $word.addEventListener('input', onInsert);
+        $input.addEventListener('input', onInput);
+        $button.addEventListener('click', onClickButton);
+
+
+    </script>
+    
+</body>
+</html>
